@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    public List<Product> findByProductId();
+    public List<Product> findAllProducts();
     public ResponseEntity<Product> productSave(Product productProps);
     public ResponseEntity<Product> findProductById(Integer productId);
     public Product productUpdate(Integer productId, Product productProps);

@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByProductId() {
+    public List<Product> findAllProducts() {
         return productRepository.findAll();
     }
 
@@ -31,10 +31,10 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<Product> productSave(Product productProps) {
         Date date = productProps.getDate();
         String description = productProps.getDescription();
-        String productname = productProps.getProductname();
+        String productname = productProps.getProductName();
         String imgUrl = productProps.getImgUrl();
         String price = productProps.getPrice();
-        Category category = productProps.getCategory();
+        List<Category> category = productProps.getCategories();
 
         if ( date == null || description == null ||  productname == null || imgUrl == null || price == null || category == null){
             throw new ProductExceptions.ProductException("Todos os campos devem ser completados");
@@ -65,10 +65,10 @@ public class ProductServiceImpl implements ProductService {
 
             Date newDate = productProps.getDate();
             String newDescription = productProps.getDescription();
-            String newProductname = productProps.getProductname();
+            String newProductname = productProps.getProductName();
             String newImgUrl = productProps.getImgUrl();
             String newPrice = productProps.getPrice();
-            Category newCategory = productProps.getCategory();
+            List<Category> newCategory = productProps.getCategories();
 
             if (newDate == null || newDescription == null || newProductname == null || newImgUrl == null || newPrice == null || newCategory == null) {
                 throw new ProductExceptions.ProductException("Todos os campos devem ser preenchidos");
@@ -76,10 +76,10 @@ public class ProductServiceImpl implements ProductService {
 
             product.setDate(newDate);
             product.setDescription(newDescription);
-            product.setProductname(newProductname);
+            product.setProductName(newProductname);
             product.setImgUrl(newImgUrl);
             product.setPrice(newPrice);
-            product.setCategory(newCategory);
+            product.setCategories(newCategory);
 
             return productRepository.save(product);
         } else {

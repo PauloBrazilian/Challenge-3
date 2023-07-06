@@ -6,14 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Getter@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "Product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +27,21 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "productname")
-    private String productname;
+    @Column(name = "product_Name")
+    private String productName;
 
-    @Column(name = "imgUrl")
+    @Column(name = "img_Url")
     private String imgUrl;
 
     @Column(name = "price")
     private String price;
 
-    @Column(name = "category")
-    @Enumerated(EnumType.STRING)
-    private Category category;
+
+    @ManyToMany
+    @JoinTable(name = "product_category",
+            joinColumns = @JoinColumn(name = "product_fk"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<Category> categories;
 
     @Override
     public String toString() {
@@ -44,10 +49,10 @@ public class Product {
                 "productId=" + productId +
                 ", date=" + date +
                 ", description='" + description + '\'' +
-                ", productname='" + productname + '\'' +
+                ", productName='" + productName + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", price='" + price + '\'' +
-                ", category=" + category +
+                ", category=" + categories +
                 '}';
     }
 }
