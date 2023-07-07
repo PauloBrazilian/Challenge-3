@@ -4,7 +4,6 @@ package br.com.compassoul.pb.challenge.msnotification.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter@Setter
@@ -13,19 +12,22 @@ import lombok.*;
 @ToString
 public class EmailDto {
 
-    @NotBlank @NotNull
+    @NotBlank
     private String fromEmail;
 
-    @NotBlank @NotNull @Email
+    @Email
     private String fromName;
 
-    @NotBlank @NotNull @Email
+    @Email
     private String replyTo;
 
-    @NotBlank @NotNull
+    @NotBlank
     private String subject;
 
-    @NotBlank @NotNull
+    @NotBlank
     private String body;
+
+    @NotBlank
+    private String contentType;
 
 }
