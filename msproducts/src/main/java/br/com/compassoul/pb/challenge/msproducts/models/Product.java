@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +24,7 @@ public class Product implements Serializable {
     private Integer productId;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDateTime date;
 
     @Column(name = "description")
     private String description;
@@ -34,14 +36,16 @@ public class Product implements Serializable {
     private String imgUrl;
 
     @Column(name = "price")
-    private String price;
-
+    private BigDecimal price;
 
     @ManyToMany
     @JoinTable(name = "product_category",
-            joinColumns = @JoinColumn(name = "product_fk"),
+            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "productId" ),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
+
+    public Product(LocalDateTime date, String description, String productname, String imgUrl, BigDecimal price, List<Category> category) {
+    }
 
     @Override
     public String toString() {

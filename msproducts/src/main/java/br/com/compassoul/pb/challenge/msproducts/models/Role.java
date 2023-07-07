@@ -1,5 +1,6 @@
 package br.com.compassoul.pb.challenge.msproducts.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,8 @@ public class Role implements Serializable {
     private String roleName;
 
     @ManyToMany(mappedBy = "roles")
+    @Column(nullable = false)
+    @JsonIgnore
     private List<Person> persons;
 
     @Override

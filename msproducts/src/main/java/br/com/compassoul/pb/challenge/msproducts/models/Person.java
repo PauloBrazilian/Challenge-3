@@ -36,12 +36,14 @@ public class Person implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "person_role",
-            joinColumns = @JoinColumn(name = "person_Fk"),
+            joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "personId"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Column(nullable = false)
     private List<Role> roles;
 
-    public Person(String nameSanitized, String lastNameSanitized, String emailSanitized, String passwordSanitized, List<Role> roleSanitized) {
+    public Person(String firstName, String lastName, String email, String password, List<Role> roles) {
     }
+
 
     @Override
     public String toString() {

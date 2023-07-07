@@ -1,5 +1,6 @@
 package br.com.compassoul.pb.challenge.msproducts.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,8 @@ public class Category implements Serializable {
     private String categoryName;
 
     @ManyToMany(mappedBy = "categories")
+    @Column(nullable = false)
+    @JsonIgnore
     private List<Product> products;
 
     @Override
